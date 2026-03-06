@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Umutflix | Hızlı Akış</title>
+    <style>
+        body { background: #111; color: white; font-family: sans-serif; margin: 0; }
+        .navbar { padding: 20px; background: #000; color: red; font-size: 24px; font-weight: bold; }
+        .container { padding: 20px; display: flex; gap: 20px; }
+        .card { width: 200px; cursor: pointer; background: #222; border-radius: 8px; text-align: center; padding-bottom: 10px; }
+        .card img { width: 100%; border-radius: 8px 8px 0 0; }
+
+        /* PLAYER KATMANI */
+        #playerOverlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999;
+        }
+
+        /* TV hızı için optimize edilmiş iframe */
+        iframe { width: 100%; height: 100%; border: none; }
+
+        .close-btn { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; z-index: 10001; }
+        
+    
+    </style>
+</head>
+<body>
+
+    <div class="navbar">UMUTFLIX</div>
+
+    <div class="container">
+        <div class="card" onclick="videoAc('xa1bzbc')">
+            <img src="https://image.kanald.com.tr/i/kanald/100/0x0/67becba29a1693e033e1a12c.jpg">
+            <p>33. Bölüm</p>
+        </div>
+        <div class="card" onclick="videoAc('xa1bzhs')">
+            <img src="https://image.kanald.com.tr/i/kanald/100/0x0/67becba29a1693e033e1a12c.jpg">
+            <p>34. Bölüm</p>
+        </div>
+    </div>
+
+    <div id="playerOverlay">
+        <span class="close-btn" onclick="videoKapat()">&times;</span>
+        <iframe id="dailyFrame" src="" allow="autoplay; fullscreen"></iframe>
+    </div>
+
+    <script>
+        function videoAc(videoId) {
+            const overlay = document.getElementById('playerOverlay');
+            const frame = document.getElementById('dailyFrame');
+            
+    
+            const params = "?autoplay=1&ui-logo=0&sharing-enable=0&ui-start-screen-info=0";
+            
+            frame.src = "https://www.dailymotion.com/embed/video/" + videoId + params;
+            overlay.style.display = 'block';
+        }
+
+        function videoKapat() {
+            const overlay = document.getElementById('playerOverlay');
+            const frame = document.getElementById('dailyFrame');
+            frame.src = ""; 
+            overlay.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
